@@ -1,33 +1,9 @@
 # EMR Deployment Scripts #
 
 This subdirectory provides the necessary means to start an EMR cluster on
-Amazon's computing infrastructure which provides Geotrellis capabilities.  The
-primary means for interaction with this cluster are through Jupyter notebooks
-and spark-submit commands.
-
-> Note: using `spark-submit` requires that application-dependent make targets
-> be constructed to submit an EMR step.  Given the lack of concrete
-> applications to run, these targets do not yet exist.
-
-Two Jupyter kernels will be provided that will allow for different sorts of
-work flows.  The first is a Python kernel available under the `GeoPySpark`
-entry in the `New` menu on the Jupyter home page.  This kernel allows for
-Spark processes mediated by GeoPySpark, with the myriad visualization options
-provided by the underlying IPython kernel through Folium, matplotlib, and
-other plugins.
-
-The second option is to use the Scala kernel, provided by the
-[Almond](http://almond-sh.github.io/almond/stable/docs/intro) plugin, which
-runs on top of [Ammonite](http://ammonite.io).  When creating a new Scala
-project, the boilerplate for building a SparkSession object and loading
-external dependencies can be inserted at the top of the notebook by clicking
-the star icon in the toolbar.
-
-> Note: The Scala kernel is not yet up to full working order.  It is possible,
-> however, to ssh into the master node and use spark-shell if one wishes to
-> have an interactive Scala session.  No documentation will be provided for
-> this method, as the current goal is to allow all required interaction via
-> Jupyter.
+Amazon's computing infrastructure which provides Geotrellis capabilities.  For
+the moment, this implies making binary capabilities available for use with
+`spark-shell` or `spark-submit`.  The future should bring more capability.
 
 ## Cluster Configuration and Management ##
 
@@ -100,16 +76,6 @@ Provides configurations to the applications provided by the EMR cluster
 for more details.
 
 ### Environment Variables ###
-
-`GEOPYSPARKSHA`: If you intend to work with a development version of
-GeoPySpark, you may specify the SHA of a Github commit to use during the
-build.  This will be pulled from the `locationtech-labs/geopyspark`
-repository.
-
-> Note: This will not adjust the mechanism for downloading the supporting jar
-> file, which will still be downloaded as described in the documentation for
-> `GEOPYSPARK_VERSION` above.  This limitation can be removed in a subsequent
-> update to these scripts.
 
 `CLUSTER_ID`: If you are working with multiple clusters, you may need to
 specify the cluster ID for the target cluster, or the last created cluster
