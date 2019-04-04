@@ -1,0 +1,61 @@
+[
+    {
+        "Classification": "spark",
+        "Properties": {
+            "maximizeResourceAllocation": "true"
+        }
+    },
+    {
+        "Classification": "spark-env",
+        "Configurations": [
+            {
+                "Classification": "export",
+                "Properties": {
+                    "LD_LIBRARY_PATH": "/usr/local/lib"
+                }
+            }
+        ]
+    },
+    {
+        "Classification": "spark-defaults",
+        "Properties": {
+            "spark.driver.maxResultSize": "3G",
+            "spark.dynamicAllocation.enabled": "true",
+            "spark.shuffle.service.enabled": "true",
+            "spark.shuffle.compress": "true",
+            "spark.shuffle.spill.compress": "true",
+            "spark.rdd.compress": "true",
+            "spark.executor.memoryOverhead": "1G",
+            "spark.driver.memoryOverhead": "1G",
+            "spark.driver.maxResultSize": "3G",
+            "spark.executorEnv.LD_LIBRARY_PATH": "/usr/local/lib",
+            "spark.executor.extraJavaOptions" : "-XX:+UseParallelGC -Dgeotrellis.s3.threads.rdd.write=64"
+        }
+    },
+    {
+        "Classification": "yarn-site",
+        "Properties": {
+            "yarn.resourcemanager.am.max-attempts": "1",
+            "yarn.nodemanager.vmem-check-enabled": "false",
+            "yarn.nodemanager.pmem-check-enabled": "false"
+        }
+    },
+    {
+        "Classification": "zeppelin-env",
+        "Properties": {
+        },
+        "Configurations": [
+            {
+                "Classification": "export",
+                "Properties": {
+                    "_ZEPPELIN_NOTEBOOK_STORAGE": "org.apache.zeppelin.notebook.repo.S3NotebookRepo",
+                    "_ZEPPELIN_NOTEBOOK_S3_BUCKET": "",
+                    "_ZEPPELIN_NOTEBOOK_S3_USER": "",
+                    "_ZEPPELIN_NOTEBOOK_S3_ENDPOINT": "s3.amazonaws.com"
+                },
+                "Configurations": [
+                ]
+            }
+        ]
+    }
+]
