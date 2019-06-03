@@ -16,7 +16,7 @@ Prefix:    /usr/local
 Group:     Azavea
 Requires:  libpng
 Requires:  libcurl
-Requires:  libgeos
+Requires:  geos
 Requires:  hdf5
 Requires:  netcdf
 Requires:  laszip
@@ -32,7 +32,7 @@ BuildRequires: libgeotiff
 BuildRequires: laszip
 BuildRequires: hdf5
 BuildRequires: netcdf
-BuildRequires: gdal231
+BuildRequires: gdal241
 BuildRequires: cmake3
 
 %description
