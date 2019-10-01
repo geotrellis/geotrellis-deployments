@@ -8,12 +8,13 @@ RUN yum makecache fast
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm && \
     yum install -y yum install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-6.noarch.rpm && \
     yum update -y
-RUN yum install -y java-1.8.0-openjdk geos
+RUN yum install -y java-1.8.0-openjdk geos tar
 
 # Spark
-ENV SPARK_HOME /usr/local/spark-2.3.3-bin-hadoop2.7
-ADD blobs/spark-2.3.3-bin-hadoop2.7.tgz /usr/local
+ADD blobs/spark-2.3.3-bin-hadoop2.7.tgz /usr/local/
 RUN ln -s /usr/local/spark-2.3.3-bin-hadoop2.7 /usr/local/spark
+ENV SPARK_HOME /usr/local/spark
+ENV PATH="/usr/local/spark/bin:${PATH}"
 
 # kit, caboodle
 ADD RPMS /blobs/
@@ -26,7 +27,8 @@ RUN yum localinstall -y \
     /blobs/pdal-1.8.0-33.x86_64.rpm \
     /blobs/laszip-3.2.9-33.x86_64.rpm \
     /blobs/proj493-4.9.3-33.x86_64.rpm \
-    /blobs/libgeotiff-1.4.0-33.x86_64.rpm
+    /blobs/libgeotiff-1.4.0-33.x86_64.rpm && \
+    rm -r /blobs
 
 RUN echo /usr/local/lib >> /etc/ld.so.conf.d/local.conf && \
     echo /usr/local/lib64 >> /etc/ld.so.conf.d/local.conf && \
