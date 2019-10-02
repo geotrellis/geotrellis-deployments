@@ -14,11 +14,15 @@ Linux environments.  Principally, this is EMR, but may also be an
 
 See the `rpms` directory for details.
 
-In the future, we hope to produce Python wheels to enable use of
-[GeoPySpark](https://github.com/locationtech-labs/geopyspark) on our target
-environments.
-
 ## Deploying Geotrellis to AWS ##
 
 The `emr` directory contains Makefiles to allow deployment to an Amazon Elastic
 Map-Reduce (EMR) cluster.  See that directory for details on how to do so.
+
+## Docker Container ##
+
+We provide a docker image that uses the binary RPM artifacts to build a
+container environment based on the `amazonlinux` base.  This permits offline
+testing prior to EMR deployment, and gives a more fully-featured environment
+than some previously-existing docker images, including NetCDF, HDF5, and PDAL
+support.  See the `docker` directory for more details.
