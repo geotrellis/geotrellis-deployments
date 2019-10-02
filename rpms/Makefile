@@ -26,9 +26,6 @@ rpmbuild/SOURCES/gdal-2.4.1.tar.gz rpmbuild/SOURCES/node-v8.5.0.tar.gz \
 rpmbuild/SOURCES/proj-4.9.3.tar.gz rpmbuild/SOURCES/PDAL-1.8.0.tar.gz \
 rpmbuild/SOURCES/laszip-src-3.2.9.tar.gz rpmbuild/SOURCES/libgeotiff-1.4.0.tar.gz
 
-blobs/spark-2.1.0-bin-hadoop2.7.tgz:
-	curl -L "http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz" -o $@
-
 rpmbuild/SOURCES/%.tar: %/
 	tar cvf $@ $<
 
