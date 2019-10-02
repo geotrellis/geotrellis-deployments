@@ -1,8 +1,8 @@
 VERSION := 1
 IMAGETAG := quay.io/geotrellis/base:$(VERSION)
 
-blobs/spark-2.3.3-bin-hadoop2.7.tgz:
-	curl -L "http://archive.apache.org/dist/spark/spark-2.3.3/spark-2.3.3-bin-hadoop2.7.tgz" -o $@
+blobs/spark-2.4.0-bin-hadoop2.7.tgz:
+	curl -L "http://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz" -o $@
 
 RPMS/netcdf-4.5.0-33.x86_64.rpm: ../rpms/rpmbuild/RPMS/x86_64/netcdf-4.5.0-33.x86_64.rpm
 RPMS/gdal241-2.4.1-33.x86_64.rpm: ../rpms/rpmbuild/RPMS/x86_64/gdal241-2.4.1-33.x86_64.rpm
@@ -27,7 +27,7 @@ RPMS/%:
 	cp -f $< $@
 
 
-image: rpms blobs/spark-2.3.3-bin-hadoop2.7.tgz
+image: rpms blobs/spark-2.4.0-bin-hadoop2.7.tgz
 	docker build -t $(IMAGETAG) .
 
 clean:

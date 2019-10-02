@@ -11,8 +11,8 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.n
 RUN yum install -y java-1.8.0-openjdk geos tar
 
 # Spark
-ADD blobs/spark-2.3.3-bin-hadoop2.7.tgz /usr/local/
-RUN ln -s /usr/local/spark-2.3.3-bin-hadoop2.7 /usr/local/spark
+ADD blobs/spark-2.4.0-bin-hadoop2.7.tgz /usr/local/
+RUN ln -s /usr/local/spark-2.4.0-bin-hadoop2.7 /usr/local/spark
 ENV SPARK_HOME /usr/local/spark
 ENV PATH="/usr/local/spark/bin:${PATH}"
 
