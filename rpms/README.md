@@ -8,7 +8,10 @@ need to build these artifacts yourself. Specifically:
 
 > **Do nothing** if you are intending to deploy to EMR and have access to
 > pre-built RPMs. Simply point the EMR scripts to the relevant resources on
-> S3 at `s3://geotrellis-build-artifacts/rpms/`. [See below](#working-with-sbt-lighter) if using sbt-lighter.
+> S3 at `s3://geotrellis-build-artifacts/rpms/`. [See below](#working-with-sbt-lighter)
+> if using sbt-lighter to manage your EMR cluster. Otherwise, if you are not
+> already managing your own EMR clusters, see [the EMR README](../emr/README.md)
+> for instructions on using this repo's Makefiles to setup a new EMR cluster.
 
 > **[Fetch](#Fetching), do not build** if you have access to an already-built set of
 > RPMs, and your purpose is to use these RPMs to build a Docker container.
