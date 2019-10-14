@@ -16,6 +16,9 @@ need to build these artifacts yourself. Specifically:
 > **[Fetch](#Fetching), do not build** if you have access to an already-built set of
 > RPMs, and your purpose is to use these RPMs to build a Docker container.
 
+> **[Build](#Building) and [Publish](#Publishing)** if you have a special use case,
+> and the pre-built binaries are not sufficient.
+
 ## Caveats
 
 ### GDAL S3 Credentials in EMR jobs
