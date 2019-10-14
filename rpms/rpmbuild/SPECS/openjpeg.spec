@@ -16,9 +16,6 @@ Prefix:    /usr/local
 Group:     Azavea
 Requires:  libpng
 Requires:  libcurl
-Requires:  libgeos
-Requires:  hdf5
-Requires:  netcdf
 BuildRequires: cmake
 BuildRequires: lcms2-devel
 

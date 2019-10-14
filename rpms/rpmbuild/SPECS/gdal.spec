@@ -1,7 +1,7 @@
 %define _topdir   /tmp/rpmbuild
-%define name      gdal231
+%define name      gdal241
 %define release   33
-%define version   2.3.1
+%define version   2.4.1
 
 %define debug_package %{nil}
 
@@ -16,7 +16,7 @@ Prefix:    /usr/local
 Group:     Azavea
 Requires:  libpng
 Requires:  libcurl
-Requires:  libgeos
+Requires:  geos
 Requires:  hdf5
 Requires:  netcdf
 BuildRequires: geos-devel
@@ -32,17 +32,17 @@ BuildRequires: netcdf
 GDAL
 
 %prep
-%setup -q -n gdal-2.3.1
+%setup -q -n gdal-2.4.1
 
 %build
-PKG_CONFIG_PATH=/usr/local/lib/pkgconfig LDFLAGS='-L/usr/local/lib -L/usr/local/lib64' CC='gcc48' ./configure --prefix=/usr/local --with-java --with-curl --with-openjpeg
+PKG_CONFIG_PATH=/usr/local/lib/pkgconfig LDFLAGS='-L/usr/local/lib -L/usr/local/lib64' CC='gcc48' ./configure --prefix=/usr/local --with-curl --with-openjpeg #--with-java
 nice -n 19 make -k -j$(grep -c ^processor /proc/cpuinfo) || make
-make -C swig/java
+#make -C swig/java
 
 %install
 nice -n 19 make DESTDIR=%{buildroot} install
-cp -L swig/java/.libs/libgdalalljni* %{buildroot}/usr/local/lib/
-cp swig/java/gdal.jar %{buildroot}/usr/local/share/
+#cp -L swig/java/.libs/libgdalalljni* %{buildroot}/usr/local/lib/
+#cp swig/java/gdal.jar %{buildroot}/usr/local/share/
 
 %package lib
 Group: Geography
@@ -53,9 +53,9 @@ The libraries
 %files lib
 %defattr(-,root,root)
 /usr/local/lib
-/usr/local/share/gdal.jar
+#/usr/local/share/gdal.jar
 
 %files
 %defattr(-,root,root)
 /usr/local/*
-/usr/local/share/gdal.jar
+#/usr/local/share/gdal.jar
