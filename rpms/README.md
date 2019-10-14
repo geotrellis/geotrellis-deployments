@@ -1,8 +1,11 @@
-# Introduction
+# RPM Binaries for Geotrellis Environments #
 
-This directory contains the configuration and build files needed to (re)build the base image and the RPMs.
-
-# Inventory
+This directory contains the configuration, build files, and Docker images
+needed to build a set of RPMs that are useful for working with Geotrellis.  If
+you are not intending to alter the composition or versions of the RPM
+packages, then you should be able to use the published binaries described in
+the README at the root of this project and do not need to build these
+artifacts yourself.
 
 Built RPMs are publicly available at:
 
@@ -35,11 +38,35 @@ Note that opening remote NetCDF files, such as is done with the GeoTrellis GDALR
 - Linux kernel 4.5+ with `userfaultd` support
 - GDAL 2.4.0+
 
-# Images
+# RPMs
 
-The following images can be built from the materials in this directory:
+## Fetching
 
-- [`quay.io/geodocker/emr-build:gcc4-8`](Dockerfile.gcc4) is used to build RPMs with gcc 4.8.
+From this directory, issue `./fetch s3://bucket/prefix/` where
+`s3://bucket/prefix/` is the path to a "directory" on S3 where RPMs have been
+previously published.  This will download the available RPMs as if you had
+built them yourself.  You may then go to the `docker` directory off the
+project root and follow the instructions for building the image.
+
+## Building
+
+If you need to build these resources yourself, either because you have
+adjusted the versions or added additional resources, or because you do not
+have access to pre-built binaries, then execute `./build.sh` from this
+directory to build all of the RPMs.  *This may take a long time.*
+
+## Publishing
+
+Once the RPMs are built, you may execute `./publish.sh s3://bucket/prefix/`
+where `s3://bucket/prefix/` is a "directory" on S3 for which you have write
+permissions.  The RPMs will be published to this location.
+
+# Inventory
+
+## Images
+
+[`quay.io/geodocker/emr-build:gcc4-8`](Dockerfile.gcc4) is used to provide a
+consistent environment for building RPMs with gcc 4.8.
 
 ## Files and Directories
 
@@ -49,15 +76,3 @@ The following images can be built from the materials in this directory:
 - [`Makefile`](Makefile) coordinates the build process.
 - The various Dockerfiles specify the various images discussed above.
 - `*.mk`: these are included in the Makefile.
-
-# RPMs
-
-## Building
-
-From within this directory, type `./build.sh` to build all of the RPMs (this could take a long time).
-Once they are built, type `./publish.sh s3://bucket/prefix/` where `s3://bucket/prefix/` is a "directory" on S3 for which you have write permissions.
-The RPMs will be published to `s3://bucket/prefix/abc123/` where `abc123` is the present git SHA.
-
-## Fetching
-
-From within this directory, type `./fetch s3://bucket/prefix/abc123/` where `s3://bucket/prefix/` is the path to a "directory" on S3 where RPMs have been previously-published, and `abc123` is the git SHA from which those RPMs were produced.

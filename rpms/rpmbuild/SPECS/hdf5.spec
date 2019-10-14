@@ -1,7 +1,7 @@
 %define _topdir   /tmp/rpmbuild
 %define name      hdf5
 %define release   33
-%define version   1.8.20
+%define version   1.8.21
 
 %define debug_package %{nil}
 
@@ -21,7 +21,7 @@ BuildRequires: libcurl-devel
 HDF5
 
 %prep
-%setup -q -n hdf5-1.8.20
+%setup -q -n hdf5-1.8.21
 
 %build
 ./configure --prefix=/usr/local
