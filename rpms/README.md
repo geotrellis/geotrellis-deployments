@@ -1,7 +1,7 @@
-# RPM Binaries for Geotrellis Environments #
+# RPM Binaries for Geotrellis Environments
 
 This directory contains the configuration, build files, and Docker images
-needed to build a set of RPMs that are useful for working with Geotrellis.  If
+needed to build a set of RPMs that are useful for working with Geotrellis. If
 you are not intending to alter the composition or versions of the RPM
 packages, then you should be able to use the published binaries described in
 the README at the root of this project and do not need to build these
@@ -44,8 +44,8 @@ Note that opening remote NetCDF files, such as is done with the GeoTrellis GDALR
 
 From this directory, issue `./fetch s3://bucket/prefix/` where
 `s3://bucket/prefix/` is the path to a "directory" on S3 where RPMs have been
-previously published.  This will download the available RPMs as if you had
-built them yourself.  You may then go to the `docker` directory off the
+previously published. This will download the available RPMs as if you had
+built them yourself. You may then go to the `docker` directory off the
 project root and follow the instructions for building the image.
 
 ## Building
@@ -53,13 +53,13 @@ project root and follow the instructions for building the image.
 If you need to build these resources yourself, either because you have
 adjusted the versions or added additional resources, or because you do not
 have access to pre-built binaries, then execute `./build.sh` from this
-directory to build all of the RPMs.  *This may take a long time.*
+directory to build all of the RPMs. _This may take a long time._
 
 ## Publishing
 
 Once the RPMs are built, you may execute `./publish.sh s3://bucket/prefix/`
 where `s3://bucket/prefix/` is a "directory" on S3 for which you have write
-permissions.  The RPMs will be published to this location.
+permissions. The RPMs will be published to this location.
 
 # Inventory
 
@@ -70,9 +70,7 @@ consistent environment for building RPMs with gcc 4.8.
 
 ## Files and Directories
 
-- [`blobs`](blobs) is an initially-empty directory that is populated with archives and RPMS from the `archives` directory.
 - [`rpmbuild`](rpmbuild) is a directory containing configuration files used to produce the RPMs.
-- [`scripts`](scripts) is a directory containing scripts used to build the RPMs mentioned above, as well as the `gdal-and-friends.tar.gz` tarball.
+- [`scripts`](scripts) is a directory containing scripts used to build the RPMs mentioned above.
 - [`Makefile`](Makefile) coordinates the build process.
-- The various Dockerfiles specify the various images discussed above.
 - `*.mk`: these are included in the Makefile.
