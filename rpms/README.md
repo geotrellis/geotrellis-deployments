@@ -3,27 +3,15 @@
 This directory contains the configuration, build files, and Docker images
 needed to build a set of RPMs that are useful for working with Geotrellis. If
 you are not intending to alter the composition or versions of the RPM
-packages, then you should be able to use the published binaries described in
-the README at the root of this project and do not need to build these
-artifacts yourself.
+packages, then you should be able to use the published binaries and do not
+need to build these artifacts yourself. Specifically:
 
-Built RPMs are publicly available at:
+> **Do nothing** if you are intending to deploy to EMR and have access to
+> pre-built RPMs. Simply point the EMR scripts to the relevant resources on
+> S3 at `s3://geotrellis-build-artifacts/rpms/`. [See below](#working-with-sbt-lighter) if using sbt-lighter.
 
-```
-s3://geotrellis-build-artifacts/rpms/
-```
-
-If you need to load them during an EMR bootstrap, you can use `s3://geotrellis-build-artifacts/rpms/bootstrap.sh`.
-
-For example:
-
-```
-BootstrapAction(
-  "Install GDAL 2.4 dependencies",
-  "s3://geotrellis-build-artifacts/rpms/bootstrap.sh",
-  "s3://geotrellis-build-artifacts", "gdal-2.4.1"
-)
-```
+> **[Fetch](#Fetching), do not build** if you have access to an already-built set of
+> RPMs, and your purpose is to use these RPMs to build a Docker container.
 
 ## Caveats
 
@@ -44,9 +32,10 @@ Note that opening remote NetCDF files, such as is done with the GeoTrellis GDALR
 
 From this directory, issue `./fetch s3://bucket/prefix/` where
 `s3://bucket/prefix/` is the path to a "directory" on S3 where RPMs have been
-previously published. This will download the available RPMs as if you had
-built them yourself. You may then go to the `docker` directory off the
-project root and follow the instructions for building the image.
+previously published, such as `s3://geotrellis-build-artifacts/rpms/`. This
+will download the available RPMs as if you had built them yourself. You
+may then go to the `docker` directory off the project root and follow the
+instructions for building the image.
 
 ## Building
 
@@ -74,3 +63,15 @@ consistent environment for building RPMs with gcc 4.8.
 - [`scripts`](scripts) is a directory containing scripts used to build the RPMs mentioned above.
 - [`Makefile`](Makefile) coordinates the build process.
 - `*.mk`: these are included in the Makefile.
+
+# Working with SBT Lighter
+
+If you're bootstrapping your EMR clusters with the [SBT lighter plugin](https://github.com/pishen/sbt-lighter) you can configure your cluster to use the RPMs described here with the following bootstrap action:
+
+```scala
+BootstrapAction(
+  "Install GDAL 2.4 dependencies",
+  "s3://geotrellis-build-artifacts/rpms/bootstrap.sh",
+  "s3://geotrellis-build-artifacts", "gdal-2.4.1"
+)
+```
