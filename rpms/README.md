@@ -29,9 +29,9 @@ Note that opening remote NetCDF files, such as is done with the GeoTrellis GDALR
 - Linux kernel 4.5+ with `userfaultd` support
 - GDAL 2.4.0+
 
-# RPMs
+## RPMs
 
-## Fetching
+### Fetching
 
 From this directory, issue `./fetch s3://bucket/prefix/` where
 `s3://bucket/prefix/` is the path to a "directory" on S3 where RPMs have been
@@ -40,34 +40,34 @@ will download the available RPMs as if you had built them yourself. You
 may then go to the `docker` directory off the project root and follow the
 instructions for building the image.
 
-## Building
+### Building
 
 If you need to build these resources yourself, either because you have
 adjusted the versions or added additional resources, or because you do not
 have access to pre-built binaries, then execute `./build.sh` from this
 directory to build all of the RPMs. _This may take a long time._
 
-## Publishing
+### Publishing
 
 Once the RPMs are built, you may execute `./publish.sh s3://bucket/prefix/`
 where `s3://bucket/prefix/` is a "directory" on S3 for which you have write
 permissions. The RPMs will be published to this location.
 
-# Inventory
+## Inventory
 
-## Images
+### Images
 
 [`quay.io/geodocker/emr-build:gcc4-8`](Dockerfile.gcc4) is used to provide a
 consistent environment for building RPMs with gcc 4.8.
 
-## Files and Directories
+### Files and Directories
 
 - [`rpmbuild`](rpmbuild) is a directory containing configuration files used to produce the RPMs.
 - [`scripts`](scripts) is a directory containing scripts used to build the RPMs mentioned above.
 - [`Makefile`](Makefile) coordinates the build process.
 - `*.mk`: these are included in the Makefile.
 
-# Working with SBT Lighter
+## Working with SBT Lighter
 
 If you're bootstrapping your EMR clusters with the [SBT lighter plugin](https://github.com/pishen/sbt-lighter) you can configure your cluster to use the RPMs described here with the following bootstrap action:
 
