@@ -52,21 +52,19 @@ exist an `rpms` subtree that contains RPM resources needed to bootstrap the
 cluster (see `RPMS_VERSION` below), and files will be placed in the `scripts`
 subfolder to facilitate cluster startup.
 
-`NB_BUCKET` and `NB_PREFIX`: The location on S3 where Jupyter notebooks will
-be found/stored.  The bucket must exist prior to startup, but the prefix does
-not.  If the prefix exists, any files contained therein will be available to
-the Jupyter instance after login.
-
-`GEOPYSPARK_VERSION`: The GeoPySpark version to be used.  This version must
-have a corresponding JAR file available at
-`s3://geopyspark-resources/jars/geotrellis-backend-assembly-${GEOPYSPARK_VERSION}.jar`.
-
 `RPMS_VERSION`: Identifies the version of the RPM and .whl repository to use
 during cluster bootstrapping.  This implies that the
 `s3://${S3_URI}/rpms/${RPMS_VERSION}` subfolder exists and is populated by the
 necessary resources.  See
 [here](https://github.com/geodocker/geodocker-jupyter-geopyspark/tree/master/rpms/build)
 for more information on how to generate these resources.
+
+`S3_ACCESS_KEY` and `S3_SECRET_KEY`: Credentials for S3 access (required by s3contents Jupyter plugin)
+
+`S3_NOTEBOOK_BUCKET` and `S3_NOTEBOOK_PREFIX`: The location on S3 where Jupyter notebooks will
+be found/stored.  The bucket must exist prior to startup, but the prefix does
+not.  If the prefix exists, any files contained therein will be available to
+the Jupyter instance after login.
 
 #### `cluster-configurations.json` ####
 
