@@ -15,6 +15,18 @@ ifndef CLUSTER_ID
 CLUSTER_ID=$(shell if [ -e "cluster-id.txt" ]; then cat cluster-id.txt; fi)
 endif
 
+ifndef CORE_EMR_ATTRS
+EMR_ATTRS_CORE=
+else
+EMR_ATTRS_CORE=,${CORE_EMR_ATTRS}
+endif
+
+ifndef MASTER_EMR_ATTRS
+EMR_ATTRS_MASTER=
+else
+EMR_ATTRS_MASTER=,${MASTER_EMR_ATTRS}
+endif
+
 upload-files: bootstrap.sh
 	aws s3 cp ./bootstrap.sh ${S3_URI}/scripts/bootstrap.sh
 
@@ -28,10 +40,10 @@ create-cluster: upload-files
 --ec2-attributes KeyName=${EC2_KEY},SubnetId=${SUBNET_ID},EmrManagedMasterSecurityGroup=${SECURITY_GROUP},EmrManagedSlaveSecurityGroup=${SECURITY_GROUP} \
 --applications Name=Ganglia Name=Hadoop Name=Spark Name=Zeppelin \
 --instance-groups \
-'Name=Master,${MASTER_BID_PRICE}InstanceCount=1,InstanceGroupType=MASTER,InstanceType=${MASTER_INSTANCE}' \
-'Name=Workers,${WORKER_BID_PRICE}InstanceCount=${WORKER_COUNT},InstanceGroupType=CORE,InstanceType=${WORKER_INSTANCE}' \
+'Name=Master,${MASTER_BID_PRICE}InstanceCount=1,InstanceGroupType=MASTER,InstanceType=${MASTER_INSTANCE}${EMR_ATTRS_MASTER}' \
+'Name=Workers,${WORKER_BID_PRICE}InstanceCount=${WORKER_COUNT},InstanceGroupType=CORE,InstanceType=${WORKER_INSTANCE}${EMR_ATTRS_CORE}' \
 --bootstrap-actions \
-Name=Install,Path=${S3_URI}/scripts/bootstrap.sh,Args=[${S3_URI},${RPMS_VERSION}] \
+Name=Install,Path=${S3_URI}/scripts/bootstrap.sh,Args=[${S3_URI},${RPMS_VERSION},${S3_ACCESS_KEY},${S3_SECRET_KEY},${S3_NOTEBOOK_BUCKET},${S3_NOTEBOOK_PREFIX}] \
 | tee cluster-id.txt
 
 
