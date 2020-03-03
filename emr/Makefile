@@ -32,7 +32,7 @@ upload-files: bootstrap.sh
 
 create-cluster: upload-files
 	aws emr create-cluster --name "${NAME}" ${COLOR_TAG} \
---release-label emr-5.23.0 \
+--release-label emr-5.29.0 \
 --output text \
 --use-default-roles \
 --configurations "file://$(CURDIR)/cluster-configurations.json" \

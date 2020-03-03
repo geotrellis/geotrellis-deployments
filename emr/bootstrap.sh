@@ -23,7 +23,8 @@ if is_master; then
     # Download packages
     mkdir -p /tmp/blobs/
     aws s3 sync $RPM_URI /tmp/blobs/
-    sudo yum install -y -q nodejs
+    sudo yum update -y
+    #sudo yum install -y nodejs
 
     # Install binary packages
     (cd /tmp/blobs; sudo yum localinstall -y /tmp/blobs/*.rpm)
@@ -46,8 +47,8 @@ EOF
     . /etc/profile.d/extra_profile.sh
 
     sudo pip-3.6 install --upgrade pip
-    sudo pip3 install jupyter jupyterhub sudospawner s3contents wheel pandoc pyproj matplotlib
-    sudo pip3 install --upgrade numpy
+    sudo /usr/local/bin/pip3 install jupyter jupyterhub sudospawner s3contents wheel pandoc pyproj matplotlib
+    sudo /usr/local/bin/pip3 install --upgrade numpy
 
     sudo groupadd shadow
     sudo chgrp shadow /etc/shadow
@@ -90,7 +91,7 @@ EOF
     sudo /tmp/almond-2.12.10 --install --force --id almond212 --display-name 'Scala (2.12.10)' --jupyter-path /usr/share/jupyter/kernels
 
     cd /tmp
-    sudo -u hublauncher -E env "PATH=/usr/local/bin:$PATH" jupyterhub -f /tmp/jupyterhub_config.py
+    sudo -u hublauncher -E env "PATH=/usr/local/bin:$PATH" jupyterhub -f /tmp/jupyterhub_config.py &
 
 else
 
