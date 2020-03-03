@@ -1,0 +1,6 @@
+export S3_URI :=
+export RPMS_VERSION := v1.0
+export S3_ACCESS_KEY :=
+export S3_SECRET_KEY :=
+export S3_NOTEBOOK_BUCKET :=
+export S3_NOTEBOOK_PREFIX :=

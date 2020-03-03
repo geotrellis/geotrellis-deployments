@@ -1,0 +1,11 @@
+export NAME := Geotrellis cluster - ${USER}
+export SECURITY_GROUP :=
+export MASTER_INSTANCE := m4.xlarge
+export MASTER_PRICE := 0.10
+export WORKER_INSTANCE := m4.xlarge
+export WORKER_PRICE := 0.07
+export WORKER_COUNT := 1
+export USE_SPOT := true
+
+export MASTER_EMR_ATTRS := EbsConfiguration={EbsOptimized=true,EbsBlockDeviceConfigs=[{VolumeSpecification={VolumeType=gp2,SizeInGB=1024}}]}
+export CORE_EMR_ATTRS := EbsConfiguration={EbsOptimized=true,EbsBlockDeviceConfigs=[{VolumeSpecification={VolumeType=gp2,SizeInGB=1024}}]}
