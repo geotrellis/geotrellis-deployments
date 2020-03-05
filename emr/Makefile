@@ -32,13 +32,13 @@ upload-files: bootstrap.sh
 
 create-cluster: upload-files
 	aws emr create-cluster --name "${NAME}" ${COLOR_TAG} \
---release-label emr-5.29.0 \
+--release-label emr-6.0.0-beta2 \
 --output text \
 --use-default-roles \
 --configurations "file://$(CURDIR)/cluster-configurations.json" \
 --log-uri ${S3_URI}/logs \
 --ec2-attributes KeyName=${EC2_KEY},SubnetId=${SUBNET_ID},EmrManagedMasterSecurityGroup=${SECURITY_GROUP},EmrManagedSlaveSecurityGroup=${SECURITY_GROUP} \
---applications Name=Ganglia Name=Hadoop Name=Spark Name=Zeppelin \
+--applications Name=Hadoop Name=Spark \
 --instance-groups \
 'Name=Master,${MASTER_BID_PRICE}InstanceCount=1,InstanceGroupType=MASTER,InstanceType=${MASTER_INSTANCE}${EMR_ATTRS_MASTER}' \
 'Name=Workers,${WORKER_BID_PRICE}InstanceCount=${WORKER_COUNT},InstanceGroupType=CORE,InstanceType=${WORKER_INSTANCE}${EMR_ATTRS_CORE}' \

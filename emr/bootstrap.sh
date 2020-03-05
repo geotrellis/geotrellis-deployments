@@ -27,6 +27,7 @@ if is_master; then
     #sudo yum install -y nodejs
 
     # Install binary packages
+    sudo yum install -y https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/g/geos-3.4.2-2.el7.x86_64.rpm
     (cd /tmp/blobs; sudo yum localinstall -y /tmp/blobs/*.rpm)
 
     # Linkage
@@ -46,9 +47,8 @@ EOF
     sudo mv /tmp/extra_profile.sh /etc/profile.d
     . /etc/profile.d/extra_profile.sh
 
-    sudo pip-3.6 install --upgrade pip
+    sudo pip-3.7 install --upgrade pip
     sudo /usr/local/bin/pip3 install jupyter jupyterhub sudospawner s3contents wheel pandoc pyproj matplotlib
-    sudo /usr/local/bin/pip3 install --upgrade numpy
 
     sudo groupadd shadow
     sudo chgrp shadow /etc/shadow
@@ -100,6 +100,7 @@ else
     aws s3 sync $RPM_URI /tmp/blobs/
 
     # Install binary packages
+    sudo yum install -y https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/g/geos-3.4.2-2.el7.x86_64.rpm
     (cd /tmp/blobs; sudo yum localinstall -y /tmp/blobs/*.rpm)
 
     # Linkage
